@@ -8,6 +8,7 @@ const LoginModal = ({
   setOpenLoginModal,
   setOpenSignupModal,
   setProfile,
+  darkMode
 }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -35,12 +36,12 @@ const LoginModal = ({
   if (!open) return null;
   return (
     <div className="modalOverlay">
-      <div className="modalContainer">
+      <div className={darkMode? "dark-bg2 modalContainer " : "light-bg2 modalContainer"}>
         <span className="modalBtn" onClick={onClose}>
           X
         </span>
 
-        <h2 className="title"> Login </h2>
+        <h2 className={darkMode? "d-text  title " : "l-text  title"}> Login </h2>
         <form action="login-box">
           <label htmlFor="username">username</label>
           <input
@@ -57,7 +58,7 @@ const LoginModal = ({
             }}
           />
           <button
-            className="loginBtn"
+            className={darkMode? "dlb log-button  " : "llb log-button "}
             type="submit"
             onClick={(e) => {
               login(e);

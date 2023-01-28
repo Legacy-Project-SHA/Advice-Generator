@@ -20,7 +20,8 @@ function AdviceGeneratorApp() {
   const [user, setUser] = useState("");
   const [favorites, setFavorites] = useState("");
   const [getAdvices, setGetAdvices] = useState([]);
-
+  const [darkMode, setDarkMode] = useState(true);
+  const [mode, setMode] = useState("Light Mode");
   useEffect(() => {
     getAdvice();
   }, []);
@@ -100,12 +101,20 @@ function AdviceGeneratorApp() {
     // );
     faveAdvices();
   };
+const changeMode=()=>{
+  if(darkMode){
+    setMode("Light Mode")
+  }else{
+    setMode("Dark Mode")
+  }
+  setDarkMode(!darkMode)
 
+}
   return (
-    <div className="App">
+    <div className={darkMode? "dark-bg1 d-text App " : "light-bg1 l-text App"}>
       {profile ? (
-        <div className=" logedIn-Bar">
-          <h1 className="user-name">{user.username} </h1>
+        <div className={darkMode? "dark-bg2 logedIn-Bar " : "light-bg2 logedIn-Bar"} >
+          <h1 className={darkMode? "d-text user-name" : "l-text user-name"}>{user.username} </h1>
 
           <div className="like_div">
             <a
@@ -120,8 +129,11 @@ function AdviceGeneratorApp() {
           <div>
             <a>
               <label className="switch">
-                <input type="checkbox" />
-                <span className="slider round"></span>
+                {/* <input type="checkbox" defaultValue={false}/>
+                <span className="slider round"></span> */}
+                <button onClick={() => {
+                changeMode()
+              }}>{mode}</button>
               </label>
             </a>
           </div>
@@ -148,15 +160,15 @@ function AdviceGeneratorApp() {
           </div>
         </div>
       ) : (
-        <div className="navBar">
-          <span
+        <div className={darkMode? "dark-bg2  navBar " : "light-bg2  navBar"}>
+          <span className={darkMode? "d-text  " : "l-text "}
             onClick={() => {
               setOpenSignupModal(true);
             }}
           >
             Signup
           </span>
-          <span
+          <span className={darkMode? "d-text  " : "l-text "}
             onClick={() => {
               setOpenLoginModal(true);
             }}
@@ -170,6 +182,7 @@ function AdviceGeneratorApp() {
         setOpenSignupModal={setOpenSignupModal}
         setOpenLoginModal={setOpenLoginModal}
         open={openSignupModal}
+        darkMode={darkMode}
         onClose={() => {
           setOpenSignupModal(false);
         }}
@@ -179,6 +192,7 @@ function AdviceGeneratorApp() {
         setOpenLoginModal={setOpenLoginModal}
         setProfile={setProfile}
         open={openLoginModal}
+        darkMode={darkMode}
         onClose={() => {
           setOpenLoginModal(false);
         }}
@@ -187,12 +201,13 @@ function AdviceGeneratorApp() {
         getAdvices={getAdvices}
         deleteAdvice={deleteAdvice}
         open={openFavoritesModal}
+        darkMode={darkMode}
         onClose={() => {
           setOpenFavoritesModal(false);
         }}
       />
 
-      <div id="container">
+      <div className={darkMode? "dark-bg2 container " : "light-bg2 container"}>
         <div id="advArea">
           <h4 className="advId">{adviceId}</h4>
           <h1 className="adv">{advice}</h1>
@@ -208,9 +223,10 @@ function AdviceGeneratorApp() {
             onClick={() => {
               getAdvice();
             }}
-            className="btn"
+            className={darkMode? " dbtn  btn " : " lbtn  btn"}
           >
-            <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+            <svg className={darkMode? " " : " bgr"}
+            width="24" height="24" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M20 0H4a4.005 4.005 0 0 0-4 4v16a4.005 4.005 0 0 0 4 4h16a4.005 4.005 0 0 0 4-4V4a4.005 4.005 0 0 0-4-4ZM7.5 18a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm0-9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm4.5 4.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm4.5 4.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm0-9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z"
                 fill="#202733"

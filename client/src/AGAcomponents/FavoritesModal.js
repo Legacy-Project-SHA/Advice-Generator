@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const FavoritesModal = ({ open, onClose, getAdvices, deleteAdvice }) => {
+const FavoritesModal = ({ open, onClose, getAdvices, deleteAdvice ,darkMode}) => {
   if (!open) return null;
   return (
     <div className="modalOverlay">
-      <div className="modalContainer">
+      <div className={darkMode? "dark-bg2 modalContainer " : "light-bg2 modalContainer"}>
         <span className="modalBtn" onClick={onClose}>
           X
         </span>
