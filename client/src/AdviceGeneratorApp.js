@@ -27,17 +27,38 @@ function AdviceGeneratorApp() {
   const [darkMode, setDarkMode] = useState(true);
   const [mode, setMode] = useState("Light Mode");
   const [loading , setLoading]= useState(false)
+  const [time , setTime]=useState(false)
   useEffect(() => {
     getAdvice();
   }, []);
+  // const toastOptions = {
+  //   position: "top-right",
+  //   autoClose: 1000,
+  //   theme: "dark",
+  //   pauseOnHover: true,
+  //   draggable: true,
+  // };
+  
   const toastOptions = {
     position: "top-right",
-    autoClose: 1000,
+    autoClose: 2000,
     theme: "dark",
     pauseOnHover: true,
     draggable: true,
   };
+  const toastOptions2 = {
+    position: "top-right",
+    autoClose: 2000,
+    theme: "light",
+    pauseOnHover: true,
+    draggable: true,
+  };
   const getAdvice = () => {
+    if (time){
+      toast.info("Wait few seconds and think the advice before asking a new one", toastOptions)
+    }
+    else{
+    setTime(true)
     axios
       .get(`https://api.adviceslip.com/advice`)
       .then(({ data }) => {
@@ -45,6 +66,10 @@ function AdviceGeneratorApp() {
         setAdviceId(data.slip.id);
       })
       .catch((err) => console.error("Error:", err));
+      setTimeout(() => {
+        setTime(false);
+      }, "2000")
+    }
   };
 
   useEffect(() => {
@@ -88,7 +113,13 @@ function AdviceGeneratorApp() {
       })
       .catch((err) => console.error("Error:", err));
     // setGetAdvices(getAdvices, newAdvice);
-    toast.success("Added to your favorites", toastOptions)
+    if (darkMode){
+      toast.success("Added to your favorites", toastOptions)
+    }else{
+      toast.success("Added to your favorites", toastOptions2)
+
+    }
+    
     faveAdvices();
   };
 
@@ -234,7 +265,7 @@ const changeMode=()=>{
           <hr className="line" />
         </div>
         <div id="button">
-          <button
+          <button 
             onClick={() => {
               getAdvice();
             }}

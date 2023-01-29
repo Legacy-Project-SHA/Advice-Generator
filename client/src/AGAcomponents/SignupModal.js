@@ -18,6 +18,13 @@ const SignupModal = ({
     pauseOnHover: true,
     draggable: true,
   };
+  const toastOptions2 = {
+    position: "top-right",
+    autoClose: 1000,
+    theme: "light",
+    pauseOnHover: true,
+    draggable: true,
+  };
   const signUp = (e) => {
     e.preventDefault();
     axios
@@ -30,9 +37,21 @@ const SignupModal = ({
         if (data.message === "New User Created") {
           setOpenSignupModal(false);
           toast.success(data.message, toastOptions)
-
+          if (darkMode){
+            toast.success(data.message, toastOptions)
+          }else{
+            toast.success(data.message, toastOptions2)
+      
+          }
+          setPassword("")
+          setUsername("")
         } else {
-          toast.error(data.message, toastOptions)
+          if (darkMode){
+            toast.error(data.message, toastOptions)
+          }else{
+            toast.error(data.message, toastOptions2)
+      
+          }
         }
       });
   };

@@ -20,6 +20,13 @@ const LoginModal = ({
     pauseOnHover: true,
     draggable: true,
   };
+  const toastOptions2 = {
+    position: "top-right",
+    autoClose: 1000,
+    theme: "light",
+    pauseOnHover: true,
+    draggable: true,
+  };
   const login = (e) => {
     e.preventDefault();
     axios
@@ -33,9 +40,21 @@ const LoginModal = ({
           localStorage.setItem("token", data.token);
           setOpenLoginModal(false);
           setLoading(true);
-          toast.success("Welcome ready for a new advice", toastOptions)
+          if (darkMode){
+            toast.success("Welcome ready for a new advice", toastOptions)
+          }else{
+            toast.success("Welcome ready for a new advice", toastOptions2)
+      
+          }
+          setPassword("")
+          setUsername("")
         } else {
-          toast.error(data.message, toastOptions)
+          if (darkMode){
+            toast.error(data.message, toastOptions)
+          }else{
+            toast.error(data.message, toastOptions2)
+      
+          }
         }
       });
   };
