@@ -8,7 +8,7 @@ const LoginModal = ({
   onClose,
   setOpenLoginModal,
   setOpenSignupModal,
-  setProfile,
+  setLoading,
   darkMode
 }) => {
   const [username, setUsername] = useState("");
@@ -32,7 +32,7 @@ const LoginModal = ({
         if (data.token) {
           localStorage.setItem("token", data.token);
           setOpenLoginModal(false);
-          setProfile(true);
+          setLoading(true);
           toast.success("Welcome ready for a new advice", toastOptions)
         } else {
           toast.error(data.message, toastOptions)

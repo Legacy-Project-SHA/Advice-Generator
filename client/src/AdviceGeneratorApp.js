@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart,
   faArrowRightFromBracket,
+  faSun,
+  faMoon
 } from "@fortawesome/free-solid-svg-icons";
 // , faTrash
 import { ToastContainer, toast } from "react-toastify";
@@ -24,6 +26,7 @@ function AdviceGeneratorApp() {
   const [getAdvices, setGetAdvices] = useState([]);
   const [darkMode, setDarkMode] = useState(true);
   const [mode, setMode] = useState("Light Mode");
+  const [loading , setLoading]= useState(false)
   useEffect(() => {
     getAdvice();
   }, []);
@@ -52,11 +55,12 @@ function AdviceGeneratorApp() {
         })
         .then(({ data }) => {
           setUser(data);
+          setProfile(true);
         })
         .catch((err) => console.error("Error:", err));
     }
     faveAdvices();
-  }, [profile]);
+  }, [loading]);
   // useEffect(() => {
 
   //   if (user){
@@ -95,7 +99,9 @@ function AdviceGeneratorApp() {
   };
   const logOut = ()=>{
     setProfile(false)
+    setUser("")
     localStorage.clear()
+    setLoading(false)
   }
   const deleteAdvice = async (id) => {
     await fetch("http://localhost:3636/advice/" + id, {
@@ -134,15 +140,16 @@ const changeMode=()=>{
               <FontAwesomeIcon icon={faHeart} />
             </a>
           </div>
-          <div>
-            <a>
-              <label className="switch">
-                {/* <input type="checkbox" defaultValue={false}/>
-                <span className="slider round"></span> */}
-                <button onClick={() => {
-                changeMode()
-              }}>{mode}</button>
-              </label>
+         
+          
+          <div className="like_div">
+            <a
+              className="my_favs"
+              onClick={() => {
+                changeMode();
+              }}
+            >
+              <FontAwesomeIcon icon={darkMode? faSun  : faMoon} />
             </a>
           </div>
           <div>
@@ -198,7 +205,7 @@ const changeMode=()=>{
       <LoginModal
         user={user}
         setOpenLoginModal={setOpenLoginModal}
-        setProfile={setProfile}
+        setLoading={setLoading}
         open={openLoginModal}
         darkMode={darkMode}
         onClose={() => {
