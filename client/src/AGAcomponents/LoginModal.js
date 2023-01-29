@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const LoginModal = ({
   open,
   user,
@@ -12,7 +13,13 @@ const LoginModal = ({
 }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const toastOptions = {
+    position: "top-right",
+    autoClose: 1000,
+    theme: "dark",
+    pauseOnHover: true,
+    draggable: true,
+  };
   const login = (e) => {
     e.preventDefault();
     axios
@@ -24,11 +31,11 @@ const LoginModal = ({
         console.log(data);
         if (data.token) {
           localStorage.setItem("token", data.token);
-          console.log(user);
           setOpenLoginModal(false);
           setProfile(true);
+          toast.success("Welcome ready for a new advice", toastOptions)
         } else {
-          alert(data.message);
+          toast.error(data.message, toastOptions)
         }
       });
   };
@@ -68,6 +75,7 @@ const LoginModal = ({
           </button>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };

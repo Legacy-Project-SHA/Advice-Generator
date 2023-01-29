@@ -10,6 +10,8 @@ import {
   faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 // , faTrash
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function AdviceGeneratorApp() {
   const [adviceId, setAdviceId] = useState("");
   const [advice, setAdvice] = useState("");
@@ -25,7 +27,13 @@ function AdviceGeneratorApp() {
   useEffect(() => {
     getAdvice();
   }, []);
-
+  const toastOptions = {
+    position: "top-right",
+    autoClose: 1000,
+    theme: "dark",
+    pauseOnHover: true,
+    draggable: true,
+  };
   const getAdvice = () => {
     axios
       .get(`https://api.adviceslip.com/advice`)
@@ -76,7 +84,7 @@ function AdviceGeneratorApp() {
       })
       .catch((err) => console.error("Error:", err));
     // setGetAdvices(getAdvices, newAdvice);
-    console.log(newAdvice);
+    toast.success("Added to your favorites", toastOptions)
     faveAdvices();
   };
 
@@ -235,6 +243,7 @@ const changeMode=()=>{
           </button>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

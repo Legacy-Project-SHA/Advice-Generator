@@ -1,6 +1,7 @@
 import axios from "axios";
 import {  useState } from "react";
-// useEffect,
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const SignupModal = ({
   open,
   onClose,
@@ -10,7 +11,13 @@ const SignupModal = ({
 }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const toastOptions = {
+    position: "top-right",
+    autoClose: 1000,
+    theme: "dark",
+    pauseOnHover: true,
+    draggable: true,
+  };
   const signUp = (e) => {
     e.preventDefault();
     axios
@@ -20,12 +27,12 @@ const SignupModal = ({
       })
       .then(({ data }) => {
         console.log(data);
-        if (data.message === "User already exist ") {
+        if (data.message === "New User Created") {
           setOpenSignupModal(false);
-          setOpenLoginModal(true);
+          toast.success(data.message, toastOptions)
+
         } else {
-          setOpenSignupModal(false);
-          alert(data.message);
+          toast.error(data.message, toastOptions)
         }
       });
   };
@@ -65,6 +72,7 @@ const SignupModal = ({
           </button>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };
