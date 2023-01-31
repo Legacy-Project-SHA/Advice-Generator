@@ -12,7 +12,7 @@ body {
   flex-direction: column;
   font-family: "Manrope", sans-serif;
   align-items: center;
-  height: 100vh
+  height: 100vh;
 }
 
 .navBar {
@@ -155,8 +155,7 @@ body {
   svg {
     margin-top: 5px;
   }
-text
-  .btn {
+  text .btn {
     color: white;
     border: none;
     border-radius: 50px;
@@ -323,49 +322,45 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-.d-text{
-  color: $text-color
+.d-text {
+  color: $text-color;
 }
-.dark-border{
+.dark-border {
   border: 1px solid $border-color;
 }
-.dark-bg1{
-background-color: $bg-color
+.dark-bg1 {
+  background-color: $bg-color;
 }
-.dark-bg2{
+.dark-bg2 {
   background-color: $nav-color;
-
 }
-svg{
+svg {
   // background-color: red;
 }
-.l-text{
-  color: $ltext-color
+.l-text {
+  color: $ltext-color;
 }
-.lbtn{
-  background-color: $ltext-color
+.lbtn {
+  background-color: $ltext-color;
 }
-.dbtn{
-  background-color: $text-color
+.dbtn {
+  background-color: $text-color;
 }
-.light-border{
+.light-border {
   // border: 1px solid yellow;
 }
-.light-bg1{
+.light-bg1 {
   background-color: $lbg-color;
-
 }
-.light-bg2{
+.light-bg2 {
   background-color: $lnav-color;
-
 }
 
-
-.dlb{
+.dlb {
   color: $text-color;
   background-color: $bg-color;
 }
-.llb{
+.llb {
   color: $ltext-color;
   background-color: $lbg-color;
 }

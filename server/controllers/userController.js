@@ -59,7 +59,3 @@ module.exports = {
   userLogin,
   userVerify,
 };
-
-// app.post('/user/signup',
-// app.post('/user/login',
-// app.post('/user/verify',

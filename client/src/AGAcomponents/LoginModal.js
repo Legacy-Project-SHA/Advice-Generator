@@ -4,12 +4,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const LoginModal = ({
   open,
-  user,
   onClose,
   setOpenLoginModal,
-  setOpenSignupModal,
   setLoading,
-  darkMode
+  darkMode,
 }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -40,20 +38,18 @@ const LoginModal = ({
           localStorage.setItem("token", data.token);
           setOpenLoginModal(false);
           setLoading(true);
-          if (darkMode){
-            toast.success("Welcome ready for a new advice", toastOptions)
-          }else{
-            toast.success("Welcome ready for a new advice", toastOptions2)
-      
+          if (darkMode) {
+            toast.success("Welcome ready for a new advice?", toastOptions);
+          } else {
+            toast.success("Welcome ready for a new advice?", toastOptions2);
           }
-          setPassword("")
-          setUsername("")
+          setPassword("");
+          setUsername("");
         } else {
-          if (darkMode){
-            toast.error(data.message, toastOptions)
-          }else{
-            toast.error(data.message, toastOptions2)
-      
+          if (darkMode) {
+            toast.error(data.message, toastOptions);
+          } else {
+            toast.error(data.message, toastOptions2);
           }
         }
       });
@@ -62,12 +58,19 @@ const LoginModal = ({
   if (!open) return null;
   return (
     <div className="modalOverlay">
-      <div className={darkMode? "dark-bg2 modalContainer " : "light-bg2 modalContainer"}>
+      <div
+        className={
+          darkMode ? "dark-bg2 modalContainer " : "light-bg2 modalContainer"
+        }
+      >
         <span className="modalBtn" onClick={onClose}>
           X
         </span>
 
-        <h2 className={darkMode? "d-text  title " : "l-text  title"}> Login </h2>
+        <h2 className={darkMode ? "d-text  title " : "l-text  title"}>
+          {" "}
+          Login{" "}
+        </h2>
         <form action="login-box">
           <label htmlFor="username">username</label>
           <input
@@ -84,7 +87,7 @@ const LoginModal = ({
             }}
           />
           <button
-            className={darkMode? "dlb log-button  " : "llb log-button "}
+            className={darkMode ? "dlb log-button  " : "llb log-button "}
             type="submit"
             onClick={(e) => {
               login(e);

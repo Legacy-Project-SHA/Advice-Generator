@@ -1,7 +1,7 @@
 const Advice = require("../modules/adviceModule");
 
 const getAdvice = async (req, res) => {
-  let advices = await Advice.find({userId : req.body.userId})
+  let advices = await Advice.find({ userId: req.body.userId });
   res.send(advices);
 };
 const addAdvice = async (req, res) => {

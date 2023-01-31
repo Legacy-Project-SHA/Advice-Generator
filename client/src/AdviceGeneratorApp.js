@@ -9,9 +9,8 @@ import {
   faHeart,
   faArrowRightFromBracket,
   faSun,
-  faMoon
+  faMoon,
 } from "@fortawesome/free-solid-svg-icons";
-// , faTrash
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function AdviceGeneratorApp() {
@@ -22,23 +21,14 @@ function AdviceGeneratorApp() {
   const [openFavoritesModal, setOpenFavoritesModal] = useState(false);
   const [profile, setProfile] = useState(false);
   const [user, setUser] = useState("");
-  const [favorites, setFavorites] = useState("");
   const [getAdvices, setGetAdvices] = useState([]);
   const [darkMode, setDarkMode] = useState(true);
-  const [mode, setMode] = useState("Light Mode");
-  const [loading , setLoading]= useState(false)
-  const [time , setTime]=useState(false)
+  const [loading, setLoading] = useState(false);
+  const [time, setTime] = useState(false);
   useEffect(() => {
     getAdvice();
   }, []);
-  // const toastOptions = {
-  //   position: "top-right",
-  //   autoClose: 1000,
-  //   theme: "dark",
-  //   pauseOnHover: true,
-  //   draggable: true,
-  // };
-  
+
   const toastOptions = {
     position: "top-right",
     autoClose: 2000,
@@ -54,21 +44,30 @@ function AdviceGeneratorApp() {
     draggable: true,
   };
   const getAdvice = () => {
-    if (time){
-      toast.info("Wait few seconds and think the advice before asking a new one", toastOptions)
-    }
-    else{
-    setTime(true)
-    axios
-      .get(`https://api.adviceslip.com/advice`)
-      .then(({ data }) => {
-        setAdvice(data.slip.advice);
-        setAdviceId(data.slip.id);
-      })
-      .catch((err) => console.error("Error:", err));
+    if (time) {
+      if (darkMode) {
+        toast.info(
+          "Wait few seconds and think the advice before asking a new one",
+          toastOptions
+        );
+      } else {
+        toast.info(
+          "Wait few seconds and think the advice before asking a new one",
+          toastOptions2
+        );
+      }
+    } else {
+      setTime(true);
+      axios
+        .get(`https://api.adviceslip.com/advice`)
+        .then(({ data }) => {
+          setAdvice(data.slip.advice);
+          setAdviceId(data.slip.id);
+        })
+        .catch((err) => console.error("Error:", err));
       setTimeout(() => {
         setTime(false);
-      }, "2000")
+      }, "2000");
     }
   };
 
@@ -86,54 +85,40 @@ function AdviceGeneratorApp() {
     }
     faveAdvices();
   }, [loading]);
-  // useEffect(() => {
 
-  //   if (user){
-  //     axios.post("http://localhost:3636/advice/get" , {userId:user._id})
-  //     .then(({ data }) => {
-  //       setGetAdvices(data);
-  //       console.log(getAdvices)
-  //     })
-  //     .catch((err) => console.error("Error:", err));
-  // }}, [profile]);
   async function faveAdvices() {
     await axios
       .post("http://localhost:3636/advice/get", { userId: user._id })
       .then(({ data }) => {
         setGetAdvices(data);
-        console.log(getAdvices);
       });
   }
   const likeAdvice = () => {
-    // setFavorites(advice);
-    const newAdvice = axios
+    axios
       .post("http://localhost:3636/advice/", {
         advice: advice,
         userId: user._id,
       })
       .catch((err) => console.error("Error:", err));
-    // setGetAdvices(getAdvices, newAdvice);
-    if (darkMode){
-      toast.success("Added to your favorites", toastOptions)
-    }else{
-      toast.success("Added to your favorites", toastOptions2)
-
+    if (darkMode) {
+      toast.success("Added to your favorites", toastOptions);
+    } else {
+      toast.success("Added to your favorites", toastOptions2);
     }
-    
+
     faveAdvices();
   };
 
   const saveAdvice = () => {
-      setOpenFavoritesModal(true);
-      faveAdvices();
-
+    setOpenFavoritesModal(true);
+    faveAdvices();
   };
-  const logOut = ()=>{
-    setProfile(false)
-    setUser("")
-    localStorage.clear()
-    setLoading(false)
-  }
+  const logOut = () => {
+    setProfile(false);
+    setUser("");
+    localStorage.clear();
+    setLoading(false);
+  };
   const deleteAdvice = async (id) => {
     await fetch("http://localhost:3636/advice/" + id, {
       method: "DELETE",
@@ -141,25 +126,22 @@ function AdviceGeneratorApp() {
       .then((res) => res.json())
       .catch((err) => console.error("Error:", err));
 
-    // setGetAdvices((getAdvices) =>
-    //   getAdvices.filter((getAdvice) => getAdvice._id !== data._id)
-    // );
     faveAdvices();
   };
-const changeMode=()=>{
-  if(darkMode){
-    setMode("Light Mode")
-  }else{
-    setMode("Dark Mode")
-  }
-  setDarkMode(!darkMode)
-
-}
+  const changeMode = () => {
+    setDarkMode(!darkMode);
+  };
   return (
-    <div className={darkMode? "dark-bg1 d-text App " : "light-bg1 l-text App"}>
+    <div className={darkMode ? "dark-bg1 d-text App " : "light-bg1 l-text App"}>
       {profile ? (
-        <div className={darkMode? "dark-bg2 logedIn-Bar " : "light-bg2 logedIn-Bar"} >
-          <h1 className={darkMode? "d-text user-name" : "l-text user-name"}>{user.username} </h1>
+        <div
+          className={
+            darkMode ? "dark-bg2 logedIn-Bar " : "light-bg2 logedIn-Bar"
+          }
+        >
+          <h1 className={darkMode ? "d-text user-name" : "l-text user-name"}>
+            {user.username}{" "}
+          </h1>
 
           <div className="like_div">
             <a
@@ -171,8 +153,7 @@ const changeMode=()=>{
               <FontAwesomeIcon icon={faHeart} />
             </a>
           </div>
-         
-          
+
           <div className="like_div">
             <a
               className="my_favs"
@@ -180,7 +161,7 @@ const changeMode=()=>{
                 changeMode();
               }}
             >
-              <FontAwesomeIcon icon={darkMode? faSun  : faMoon} />
+              <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
             </a>
           </div>
           <div>
@@ -206,15 +187,17 @@ const changeMode=()=>{
           </div>
         </div>
       ) : (
-        <div className={darkMode? "dark-bg2  navBar " : "light-bg2  navBar"}>
-          <span className={darkMode? "d-text  " : "l-text "}
+        <div className={darkMode ? "dark-bg2  navBar " : "light-bg2  navBar"}>
+          <span
+            className={darkMode ? "d-text  " : "l-text "}
             onClick={() => {
               setOpenSignupModal(true);
             }}
           >
             Signup
           </span>
-          <span className={darkMode? "d-text  " : "l-text "}
+          <span
+            className={darkMode ? "d-text  " : "l-text "}
             onClick={() => {
               setOpenLoginModal(true);
             }}
@@ -253,7 +236,7 @@ const changeMode=()=>{
         }}
       />
 
-      <div className={darkMode? "dark-bg2 container " : "light-bg2 container"}>
+      <div className={darkMode ? "dark-bg2 container " : "light-bg2 container"}>
         <div id="advArea">
           <h4 className="advId">{adviceId}</h4>
           <h1 className="adv">{advice}</h1>
@@ -265,14 +248,18 @@ const changeMode=()=>{
           <hr className="line" />
         </div>
         <div id="button">
-          <button 
+          <button
             onClick={() => {
               getAdvice();
             }}
-            className={darkMode? " dbtn  btn " : " lbtn  btn"}
+            className={darkMode ? " dbtn  btn " : " lbtn  btn"}
           >
-            <svg className={darkMode? " " : " bgr"}
-            width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              className={darkMode ? " " : " bgr"}
+              width="24"
+              height="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 d="M20 0H4a4.005 4.005 0 0 0-4 4v16a4.005 4.005 0 0 0 4 4h16a4.005 4.005 0 0 0 4-4V4a4.005 4.005 0 0 0-4-4ZM7.5 18a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm0-9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm4.5 4.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm4.5 4.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm0-9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z"
                 fill="#202733"
