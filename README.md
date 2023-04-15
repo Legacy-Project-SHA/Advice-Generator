@@ -12,7 +12,7 @@ Advice Generator is a full stack online advice gererator app </br>
 :heavy_check_mark: light and dark mode</br>
 :heavy_check_mark: overall better styling</br>
 
-
+<img src="https://github.com/Vreij-Lal/Advice-Generator/blob/main/homepage.png" width = '500' align = "right"/>
 
 ## Technologies: 
 |Backend | Frontend |
@@ -23,6 +23,8 @@ Advice Generator is a full stack online advice gererator app </br>
 |mongoose| tostify|
 |bcrypt|bootstrap|
 |jwt||
+
+<img src="https://github.com/Vreij-Lal/Advice-Generator/blob/main/homepage%20light%20mode.png" width = '500' align = "right"/>
 
 ## Usage: 
 
