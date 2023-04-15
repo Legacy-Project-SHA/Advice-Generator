@@ -5,7 +5,8 @@
 ### Description:
 Advice Generator is a full stack online advice gererator app </br>
 
-<img src="https://github.com/Vreij-Lal/Advice-Generator/blob/main/homepage.png" width = '500' align = "right" style="margin-bottom: 20;"/>
+<img src="https://github.com/Vreij-Lal/Advice-Generator/blob/main/homepage.png" width = '500' align = "right" "/><br>
+
 
 ### New added features and bug fixes:
 :heavy_check_mark: overall fixing of broken functions </br>
@@ -14,7 +15,8 @@ Advice Generator is a full stack online advice gererator app </br>
 :heavy_check_mark: light and dark mode</br>
 :heavy_check_mark: overall better styling</br>
 
-<img src="https://github.com/Vreij-Lal/Advice-Generator/blob/main/homepage%20light%20mode.png" width = '500' align = "right"/>
+<img src="https://github.com/Vreij-Lal/Advice-Generator/blob/main/homepage%20light%20mode.png" width = '500' align = "right"/><br>
+
 
 ## Technologies: 
 |Backend | Frontend |
