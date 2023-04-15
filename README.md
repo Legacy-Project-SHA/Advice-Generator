@@ -1,25 +1,51 @@
-# Advice Generator Legacy Project
+# Online advice generator
 
-- this is a legacy project
+### Title: "Advice Generator" 
 
-# Overview:
+### Description:
+Advice Generator is a full stack online advice gererator app </br>
 
-- The advice generator was originally built with the mern stack, it had some features such signing up, although some of its functionality was not working well.
+### New added features and bug fixes:
+:heavy_check_mark: overall fixing of broken functions </br>
+:heavy_check_mark: styled notification alerts </br>
+:heavy_check_mark: logging out feature and button</br>
+:heavy_check_mark: light and dark mode</br>
+:heavy_check_mark: overall better styling</br>
 
-# Added features:
 
-## the folowing features were added:
 
-- overall fixing of broken functions
-- styled notification alerts
-- light and dark mode
-- logging out feature implemented
-- overall better styling
+## Technologies: 
+|Backend | Frontend |
+| --- | --- |
+| node.js | react.js |
+| express.js |sass|
+| mongoDB | socket.io-client| 
+|mongoose| tostify|
+|bcrypt|bootstrap|
+|jwt||
 
-## features to be added in the future
+## Usage: 
 
-- responsive design
+### Demo:
+- Watch video [here](https://www.youtube.com/watch?v=HH8ess0OGc8)
 
-# Installation:
+### User usage:
+-you can immediately start clicking on the generator to get advice, and also create an account to add your favorite advices in your favorites list.
 
-- Using and installing the advice generator is quite simple, all that is required is to install all the dependencies (via NPM) of the server and client folders.(each folder has a separate package.json).
+## Development:
+
+### Running application:
+Make sure you have own credentials in server/.env for:
+
+- mondoDB_Api 
+
+1. Clone the repo or download it
+2. Open your terminal on serverfolder and run command "npm install"
+3. Open your terminal on client folder and run command "npm install"
+4. Having terminal open on server run command "npm start"
+5. Having terminal open on client run command "npm start"
+
+### Important: Not responsive
+
+### Note: 
+This project is a legacy code project refactored in one week. I will continue working on it in the near future, by adding additional features such as using responsive design and overall better styling.
